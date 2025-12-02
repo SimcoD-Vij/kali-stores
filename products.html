@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Kali Provisions</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-img">KP</div>
+                <div class="logo-text">Kali <span>Provisions</span></div>
+            </div>
+            
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html" class="active">Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search products..." id="globalSearch">
+                </div>
+                <a href="tel:9840416695" class="call-btn">
+                    <i class="fas fa-phone"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Products Page Header -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-header">
+                <h1>Our Products</h1>
+                <p>Quality groceries at wholesale prices</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="section filters-section">
+        <div class="container">
+            <div class="filters">
+                <div class="search-filter">
+                    <input type="text" placeholder="🔍 Search products..." id="productSearch">
+                </div>
+                <div class="category-filter">
+                    <select id="categorySelect">
+                        <option value="all">All Categories</option>
+                        <option value="vv_gold">V.V Gold Brand</option>
+                        <option value="rice">Rice & Grains</option>
+                        <option value="oil">Cooking Oil</option>
+                        <option value="spices">Spices</option>
+                        <option value="pulses">Pulses</option>
+                        <option value="beverages">Beverages</option>
+                        <option value="vegetables">Vegetables</option>
+                        <option value="snacks">Snacks</option>
+                        <option value="personalcare">Personal Care</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="section products-page">
+        <div class="container">
+            <div class="products-grid" id="productsGrid">
+                <!-- Products loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/919840416695?text=Hi,%20I%20would%20like%20to%20order%20groceries%20from%20Kali%20Provisions" 
+       class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Kali Provisions</h3>
+                    <p>Your trusted local grocery store for quality products and excellent service.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://wa.me/919840416695"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 1/B, Constable Road, Ayanavaram, Chennai-23</li>
+                        <li><i class="fas fa-phone"></i> 9840416695</li>
+                        <li><i class="fas fa-envelope"></i> saravanaguru0707@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> 6:30 AM - 10:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2024 Kali Provisions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/products.js"></script>
+</body>
+</html>
