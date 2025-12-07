@@ -1,4 +1,5 @@
 class KaliProvisions {
+    
     constructor() {
         // Safely check if products exist
         if (typeof products !== 'undefined') {
@@ -8,6 +9,7 @@ class KaliProvisions {
             console.error("Products data not loaded!");
         }
         this.currentProducts = [];
+        this.cart = [];
         this.init();
     }
 
@@ -18,6 +20,8 @@ class KaliProvisions {
         this.loadFeaturedProducts();
         this.setupProductsPage();
         this.setupFAQPage();
+        this.setupCart();
+        this.loadCart();
     }
 
     setupMobileMenu() {
@@ -44,15 +48,13 @@ class KaliProvisions {
     }
 
     setupSearch() {
-        // Global search in header
-        const searchInput = document.getElementById('globalSearch') || document.querySelector('.search-bar input');
+        const searchInput = document.getElementById('globalSearch');
         
         if (searchInput) {
             searchInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     const searchTerm = searchInput.value.trim();
                     if (searchTerm) {
-                        // Redirect to products page with search query
                         window.location.href = `products.html?search=${encodeURIComponent(searchTerm)}`;
                     }
                 }
@@ -65,7 +67,6 @@ class KaliProvisions {
         if (!featuredContainer || this.products.length === 0) return;
         
         featuredContainer.innerHTML = '';
-        // Show first 4 products as featured
         const featuredProducts = this.products.slice(0, 4);
         
         featuredProducts.forEach(product => {
@@ -77,8 +78,9 @@ class KaliProvisions {
     createProductCard(product) {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
+        productCard.dataset.id = product.id;
+        productCard.dataset.category = product.category;
         
-        // Default icons if image is missing
         const icons = {
             'rice': 'fas fa-seedling',
             'oil': 'fas fa-oil-can',
@@ -93,30 +95,45 @@ class KaliProvisions {
         };
         
         const icon = icons[product.category] || 'fas fa-shopping-basket';
-        
-        // Check if image is a URL or local path
         const hasImage = product.image && product.image !== "";
+        const fullProductName = product.name + (product.weight ? ' - ' + product.weight : '');
         
         productCard.innerHTML = `
             <div class="product-img-container">
                 <div class="product-img">
-                    ${hasImage ? `<img src="${product.image}" alt="${product.name}" onerror="this.onerror=null;this.parentElement.innerHTML='<i class=\\'${icon}\\'></i>'">` : `<i class="${icon}" style="font-size: 3rem; color: #ccc;"></i>`}
+                    ${hasImage ? 
+                        `<img src="${product.image}" alt="${product.name}" onerror="this.onerror=null;this.parentElement.innerHTML='<i class=\\'${icon}\\'></i>'">` : 
+                        `<i class="${icon}" style="font-size: 3rem; color: #ccc;"></i>`
+                    }
                     ${product.category === 'vv-gold' ? '<div class="vv-gold-badge">VV Gold</div>' : ''}
                 </div>
             </div>
             <div class="product-info">
                 <h3>${product.name}</h3>
-                ${product.weight ? `<div class="product-weight" style="color: #666; font-size: 0.9em; margin-bottom: 5px;">${product.weight}</div>` : ''}
+                ${product.weight ? `<div class="product-weight">${product.weight}</div>` : ''}
                 <div class="product-rating">
                     ${this.generateStarRating(product.rating || 4.0)}
                     <span>(${product.rating || 4.0})</span>
                 </div>
                 <p class="product-desc">${product.description || ''}</p>
-                <div class="product-actions">
-                    <a href="https://wa.me/919840416695?text=Hi,%20I%20would%20like%20to%20order%20${encodeURIComponent(product.name + (product.weight ? ' - ' + product.weight : ''))}" 
-                       class="whatsapp-btn" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Order
-                    </a>
+                
+                <div class="product-quantity-section">
+                    <div class="quantity-controls">
+                        <button class="qty-btn qty-minus" data-id="${product.id}">−</button>
+                        <input type="number" class="qty-input" value="1" min="1" data-id="${product.id}" data-name="${fullProductName}">
+                        <button class="qty-btn qty-plus" data-id="${product.id}">+</button>
+                    </div>
+                    
+                    <div class="product-buttons">
+                        <button class="add-to-cart-btn" data-id="${product.id}">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
+                        </button>
+                        
+                        <a href="https://wa.me/919840416695?text=Hi,%20I%20would%20like%20to%20order%20${encodeURIComponent(fullProductName)}" 
+                           class="whatsapp-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Quick Order
+                        </a>
+                    </div>
                 </div>
             </div>
         `;
@@ -126,12 +143,10 @@ class KaliProvisions {
 
     setupProductsPage() {
         const productsGrid = document.getElementById('productsGrid');
-        if (!productsGrid) return; // Exit if not on products page
+        if (!productsGrid) return;
         
-        // Initial Display
         this.displayProducts(this.products);
         
-        // Setup Filters
         const searchInput = document.getElementById('productSearch');
         const categorySelect = document.getElementById('categorySelect');
         
@@ -143,7 +158,6 @@ class KaliProvisions {
             categorySelect.addEventListener('change', () => this.filterProducts());
         }
         
-        // Check URL for search params (e.g. coming from Home page)
         const urlParams = new URLSearchParams(window.location.search);
         const searchParam = urlParams.get('search');
         const categoryParam = urlParams.get('category');
@@ -185,8 +199,8 @@ class KaliProvisions {
         
         if (productsToShow.length === 0) {
             productsGrid.innerHTML = `
-                <div class="no-products" style="grid-column: 1/-1; text-align: center; padding: 40px; color: white;">
-                    <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
+                <div class="no-products">
+                    <i class="fas fa-search"></i>
                     <h3>No products found</h3>
                     <p>Try adjusting your search or filter criteria</p>
                 </div>
@@ -224,9 +238,383 @@ class KaliProvisions {
         }
         return stars;
     }
+    
+    // CART METHODS
+    setupCart() {
+        this.setupCartEventListeners();
+    }
+
+    loadCart() {
+        const savedCart = localStorage.getItem('kaliCart');
+        if (savedCart) {
+            try {
+                this.cart = JSON.parse(savedCart);
+                this.updateCartDisplay();
+            } catch (e) {
+                this.cart = [];
+            }
+        }
+    }
+
+    saveCart() {
+        localStorage.setItem('kaliCart', JSON.stringify(this.cart));
+    }
+
+    addToCart(productId, productName, quantity) {
+        if (!quantity || quantity < 1) {
+            this.showNotification('Please select at least 1 quantity!', 'error');
+            return;
+        }
+        
+        console.log('Adding to cart:', { productId, productName, quantity });
+        
+        const existingItem = this.cart.find(item => item.id == productId);
+        
+        if (existingItem) {
+            existingItem.quantity += quantity;
+            this.showNotification(`Added ${quantity} more ${productName} to cart! (Total: ${existingItem.quantity})`, 'success');
+        } else {
+            this.cart.push({
+                id: productId,
+                name: productName,
+                quantity: quantity
+            });
+            this.showNotification(`Added ${quantity} × ${productName} to cart!`, 'success');
+        }
+        
+        this.saveCart();
+        this.updateCartDisplay();
+        
+        // Visual feedback
+        const addToCartBtn = document.querySelector(`[data-id="${productId}"] .add-to-cart-btn`);
+        const qtyInput = document.querySelector(`[data-id="${productId}"] .qty-input`);
+        
+        if (addToCartBtn) {
+            addToCartBtn.classList.add('added', 'cart-add-animation');
+            addToCartBtn.innerHTML = '<i class="fas fa-check"></i> Added!';
+            addToCartBtn.style.backgroundColor = '#25D366';
+            
+            setTimeout(() => {
+                addToCartBtn.classList.remove('added', 'cart-add-animation');
+                addToCartBtn.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
+                addToCartBtn.style.backgroundColor = '';
+            }, 2000);
+        }
+        
+        if (qtyInput) {
+            qtyInput.value = 1;
+        }
+        
+        this.updateHeaderCartBadge();
+    }
+
+    updateHeaderCartBadge() {
+        const totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
+        const cartBadge = document.querySelector('.cart-badge');
+        
+        if (cartBadge) {
+            if (totalItems > 0) {
+                cartBadge.textContent = totalItems;
+                cartBadge.style.display = 'flex';
+            } else {
+                cartBadge.style.display = 'none';
+            }
+        }
+    }
+
+    updateCartItem(productId, quantity) {
+        if (quantity <= 0) {
+            this.removeFromCart(productId);
+            return;
+        }
+        
+        const item = this.cart.find(item => item.id == productId);
+        if (item) {
+            item.quantity = quantity;
+            this.saveCart();
+            this.updateCartDisplay();
+        }
+    }
+
+    removeFromCart(productId) {
+        this.cart = this.cart.filter(item => item.id != productId);
+        this.saveCart();
+        this.updateCartDisplay();
+    }
+
+    clearCart() {
+        this.cart = [];
+        this.saveCart();
+        this.updateCartDisplay();
+        document.querySelectorAll('.qty-input').forEach(input => {
+            input.value = 1;
+        });
+    }
+
+    updateCartDisplay() {
+        const cartItemsEl = document.getElementById('cart-items');
+        const totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
+        
+        const cartCountEl = document.querySelector('.cart-count');
+        if (cartCountEl) {
+            cartCountEl.textContent = `${totalItems} item${totalItems !== 1 ? 's' : ''}`;
+        }
+        
+        this.updateHeaderCartBadge();
+        
+        if (!cartItemsEl) return;
+        
+        if (this.cart.length === 0) {
+            if (window.location.pathname.includes('cart.html')) {
+                cartItemsEl.innerHTML = `
+                    <div class="empty-cart-state">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Your cart is empty</h3>
+                        <p>Add some products from our store</p>
+                        <a href="products.html" class="btn btn-primary">
+                            <i class="fas fa-store"></i> Browse Products
+                        </a>
+                    </div>
+                `;
+            } else {
+                cartItemsEl.innerHTML = '<p class="empty-cart">Your cart is empty. Select quantities above and click "Add to Cart"</p>';
+            }
+            return;
+        }
+        
+        if (window.location.pathname.includes('cart.html')) {
+            cartItemsEl.innerHTML = this.cart.map(item => `
+                <div class="cart-item-card" data-id="${item.id}">
+                    <div class="cart-item-details">
+                        <h4>${item.name}</h4>
+                        <div class="cart-item-controls">
+                            <button class="cart-item-minus" data-id="${item.id}">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <span class="cart-item-qty">${item.quantity}</span>
+                            <button class="cart-item-plus" data-id="${item.id}">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="cart-item-actions">
+                        <button class="cart-item-remove" data-id="${item.id}">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        } else {
+            cartItemsEl.innerHTML = this.cart.map(item => `
+                <div class="cart-item" data-id="${item.id}">
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <div class="cart-item-qty">Quantity: ${item.quantity}</div>
+                    </div>
+                    <div class="cart-item-controls">
+                        <button class="cart-item-minus" data-id="${item.id}">−</button>
+                        <span>${item.quantity}</span>
+                        <button class="cart-item-plus" data-id="${item.id}">+</button>
+                        <button class="cart-item-remove" data-id="${item.id}">×</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+    }
+
+    setupCartEventListeners() {
+        document.addEventListener('click', (e) => {
+            const target = e.target;
+            
+            // Add to Cart button
+            let addToCartBtn = null;
+            if (target.classList.contains('add-to-cart-btn')) {
+                addToCartBtn = target;
+            } else if (target.closest('.add-to-cart-btn')) {
+                addToCartBtn = target.closest('.add-to-cart-btn');
+            }
+            
+            if (addToCartBtn) {
+                e.preventDefault();
+                const productId = addToCartBtn.dataset.id;
+                const productCard = addToCartBtn.closest('.product-card');
+                
+                if (!productCard) return;
+                
+                const productNameEl = productCard.querySelector('h3');
+                const productWeightEl = productCard.querySelector('.product-weight');
+                const productName = productNameEl ? 
+                    productNameEl.textContent + (productWeightEl ? ' ' + productWeightEl.textContent : '') : 
+                    'Unknown Product';
+                
+                const quantityInput = productCard.querySelector('.qty-input');
+                const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
+                
+                this.addToCart(productId, productName, quantity);
+                return;
+            }
+            
+            // Quantity minus button
+            if (target.classList.contains('qty-minus') || target.closest('.qty-minus')) {
+                const btn = target.classList.contains('qty-minus') ? target : target.closest('.qty-minus');
+                const input = btn.parentElement.querySelector('.qty-input');
+                
+                if (input) {
+                    let value = parseInt(input.value) || 1;
+                    if (value > 1) {
+                        value--;
+                        input.value = value;
+                    }
+                }
+                return;
+            }
+            
+            // Quantity plus button
+            if (target.classList.contains('qty-plus') || target.closest('.qty-plus')) {
+                const btn = target.classList.contains('qty-plus') ? target : target.closest('.qty-plus');
+                const input = btn.parentElement.querySelector('.qty-input');
+                
+                if (input) {
+                    let value = parseInt(input.value) || 1;
+                    value++;
+                    input.value = value;
+                }
+                return;
+            }
+            
+            // Cart item controls
+            if (target.classList.contains('cart-item-minus') || target.closest('.cart-item-minus')) {
+                const btn = target.classList.contains('cart-item-minus') ? target : target.closest('.cart-item-minus');
+                const productId = btn.dataset.id;
+                const item = this.cart.find(item => item.id == productId);
+                
+                if (item && item.quantity > 1) {
+                    this.updateCartItem(productId, item.quantity - 1);
+                } else {
+                    this.removeFromCart(productId);
+                }
+                return;
+            }
+            
+            if (target.classList.contains('cart-item-plus') || target.closest('.cart-item-plus')) {
+                const btn = target.classList.contains('cart-item-plus') ? target : target.closest('.cart-item-plus');
+                const productId = btn.dataset.id;
+                const item = this.cart.find(item => item.id == productId);
+                
+                if (item) {
+                    this.updateCartItem(productId, item.quantity + 1);
+                }
+                return;
+            }
+            
+            if (target.classList.contains('cart-item-remove') || target.closest('.cart-item-remove')) {
+                const btn = target.classList.contains('cart-item-remove') ? target : target.closest('.cart-item-remove');
+                const productId = btn.dataset.id;
+                this.removeFromCart(productId);
+                return;
+            }
+        });
+        
+        // Clear Cart button
+        const clearCartBtn = document.getElementById('clear-cart');
+        if (clearCartBtn) {
+            clearCartBtn.addEventListener('click', () => {
+                if (this.cart.length === 0) {
+                    this.showNotification('Cart is already empty!', 'info');
+                    return;
+                }
+                
+                if (confirm('Clear all items from cart?')) {
+                    this.clearCart();
+                    this.showNotification('Cart cleared!', 'success');
+                }
+            });
+        }
+        
+        // WhatsApp Order button
+        const sendOrderBtn = document.getElementById('send-whatsapp-order');
+        if (sendOrderBtn) {
+            sendOrderBtn.addEventListener('click', () => {
+                this.sendWhatsAppOrder();
+            });
+        }
+    }
+
+    sendWhatsAppOrder() {
+        const name = document.getElementById('customer-name')?.value.trim();
+        const phone = document.getElementById('customer-phone')?.value.trim();
+        const location = document.getElementById('customer-location')?.value.trim();
+        const orderType = document.querySelector('input[name="order-type"]:checked')?.value;
+        
+        if (!name || !phone) {
+            this.showNotification('Please enter your name and phone number!', 'error');
+            return;
+        }
+        
+        if (this.cart.length === 0) {
+            this.showNotification('Your cart is empty! Add some products first.', 'error');
+            return;
+        }
+        
+        let message = `*NEW ORDER - KALI PROVISIONS*\n\n`;
+        message += `*Customer Name:* ${name}\n`;
+        message += `*Phone:* ${phone}\n`;
+        if (location) message += `*Location:* ${location}\n`;
+        message += `*Order Type:* ${orderType === 'instore' ? 'In-Store Pickup' : 'Cash on Delivery (COD)'}\n`;
+        message += `*Order Time:* ${new Date().toLocaleString()}\n\n`;
+        message += `*ORDER ITEMS:*\n`;
+        
+        this.cart.forEach((item, index) => {
+            message += `${index + 1}. ${item.name} - Quantity: ${item.quantity}\n`;
+        });
+        
+        const totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
+        message += `\n*Order Summary:*\n`;
+        message += `- Total Items: ${totalItems}\n`;
+        message += `- Product Types: ${this.cart.length}\n`;
+        message += `- Payment: ${orderType === 'instore' ? 'Pay at Store' : 'Cash on Delivery'}\n`;
+        
+        if (orderType === 'cod') {
+            message += `- COD Minimum: ₹800 (total will be confirmed)\n`;
+        }
+        
+        message += `\nPlease confirm availability and total amount. Thank you! 🛒`;
+        
+        const encodedMessage = encodeURIComponent(message);
+        window.open(`https://wa.me/919840416695?text=${encodedMessage}`, '_blank');
+        this.showNotification('Order sent via WhatsApp! Please check your WhatsApp to confirm.', 'success');
+    }
+
+    showNotification(message, type = 'success') {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+            <span>${message}</span>
+            <button class="notification-close">&times;</button>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => notification.classList.add('show'), 10);
+        
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+        
+        notification.querySelector('.notification-close').addEventListener('click', () => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        });
+        
+        if (navigator.vibrate) {
+            navigator.vibrate(50);
+        }
+    }
 }
 
-// Initialize the class when the page loads
+// Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
     window.kaliProvisions = new KaliProvisions();
 });

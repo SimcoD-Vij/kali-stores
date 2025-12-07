@@ -1,4 +1,6 @@
 const products = [
+
+
     // Rice Category (16 products)
     {
         id: 1, 

@@ -13,9 +13,10 @@
     <header>
         <div class="container header-container">
             <div class="logo">
-                <div class="logo-img">KP</div>
+                <img src="./images/logo.jpg" alt="Kali Provisions Logo" class="logo-img">
                 <div class="logo-text">Kali <span>Provisions</span></div>
             </div>
+            
             
             <div class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
@@ -39,6 +40,21 @@
                     <i class="fas fa-phone"></i>
                 </a>
             </div>
+            <div class="header-actions">
+    <div class="search-bar">
+        <input type="text" placeholder="Search products..." id="globalSearch">
+    </div>
+    
+    <!-- Cart Icon -->
+    <a href="cart.html" class="cart-btn" id="header-cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge">0</span>
+    </a>
+    
+    <a href="tel:9840416695" class="call-btn">
+        <i class="fas fa-phone"></i>
+    </a>
+</div>
         </div>
     </header>
 
@@ -53,29 +69,45 @@
     </section>
 
     <!-- Filters Section -->
-    <section class="section filters-section">
-        <div class="container">
-            <div class="filters">
-                <div class="search-filter">
-                    <input type="text" placeholder="🔍 Search products..." id="productSearch">
-                </div>
-                <div class="category-filter">
-                    <select id="categorySelect">
-                        <option value="all">All Categories</option>
-                        <option value="vv_gold">V.V Gold Brand</option>
-                        <option value="rice">Rice & Grains</option>
-                        <option value="oil">Cooking Oil</option>
-                        <option value="spices">Spices</option>
-                        <option value="pulses">Pulses</option>
-                        <option value="beverages">Beverages</option>
-                        <option value="vegetables">Vegetables</option>
-                        <option value="snacks">Snacks</option>
-                        <option value="personalcare">Personal Care</option>
-                    </select>
-                </div>
+    <!-- Filters Section -->
+<section class="section filters-section">
+    <div class="container">
+        <div class="filters">
+            <!-- Hint text -->
+            <p class="search-hint">Quick Search</p>
+            
+            <!-- Search Input -->
+            <div class="search-filter">
+                <input type="text" placeholder="Type product name or brand..." id="productSearch">
             </div>
+            
+            <!-- Category Select -->
+            <!-- Category Select -->
+<div class="category-filter">
+    <select id="categorySelect">
+        <option value="all">Browse Categories</option>
+        <option value="vv-gold">V.V Gold Brand</option> <!-- Changed to vv-gold -->
+        <option value="rice">Rice & Grains</option>
+        <option value="oil">Cooking Oil</option>
+        <option value="spices">Spices</option>
+        <option value="pulses">Pulses</option>
+        <option value="beverages">Beverages</option>
+        <option value="vegetables">Vegetables</option>
+        <option value="snacks">Snacks</option>
+        <option value="personal-care">Personal Care</option> <!-- Changed to personal-care -->
+    </select>
+</div>
+            
+            <!-- Products Count -->
+            <div class="products-count" id="productsCount">
+                All Products
+            </div>
+            
+            
         </div>
-    </section>
+    </div>
+</section>
+</section>
 
     <!-- Products Grid -->
     <section class="section products-page">
@@ -85,6 +117,90 @@
             </div>
         </div>
     </section>
+        <!-- Products Grid -->
+    <section class="section products-page">
+        <div class="container">
+            <div class="products-grid" id="productsGrid">
+                <!-- Products loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SHOPPING CART SYSTEM - ADD THIS CODE HERE -->
+    <!-- ========================================== -->
+    <section class="cart-section">
+        <div class="container">
+            <div class="cart-header">
+                <h2><i class="fas fa-shopping-cart"></i> Shopping Cart (Multiple Items)</h2>
+                <p>Want to order multiple products? Use this cart system:</p>
+                <span class="cart-count">0 items</span>
+            </div>
+            
+            <div class="cart-instructions">
+                <p><i class="fas fa-info-circle"></i> <strong>How to use:</strong> Select quantity for each product above and click "Add to Cart"</p>
+            </div>
+            
+            <div class="cart-items" id="cart-items">
+                <p class="empty-cart">Your cart is empty. Select quantities above and click "Add to Cart"</p>
+            </div>
+            
+            <!-- Order Form -->
+            <div class="order-form">
+                <h3><i class="fas fa-clipboard-list"></i> Order Details</h3>
+                
+                <div class="form-group">
+                    <label for="customer-name"><i class="fas fa-user"></i> Your Name *</label>
+                    <input type="text" id="customer-name" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="customer-phone"><i class="fas fa-phone"></i> Phone Number *</label>
+                    <input type="tel" id="customer-phone" placeholder="Enter your WhatsApp number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="customer-location"><i class="fas fa-map-marker-alt"></i> Delivery Location</label>
+                    <input type="text" id="customer-location" placeholder="Enter your address for delivery">
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-shipping-fast"></i> Order Type *</label>
+                    <div class="order-type">
+                        <label class="radio-label">
+                            <input type="radio" name="order-type" value="instore" checked>
+                            <span>🏪 In-Store Pickup (Pay at Shop)</span>
+                            <small>We'll pack all your selected items. Visit shop, collect & pay at counter.</small>
+                        </label>
+                        
+                        <label class="radio-label">
+                            <input type="radio" name="order-type" value="cod">
+                            <span>🚚 Cash on Delivery (COD)</span>
+                            <small>Available for orders above ₹800. Delivery charges vary by location.</small>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button class="btn btn-clear" id="clear-cart">
+                        <i class="fas fa-trash"></i> Clear Cart
+                    </button>
+                    
+                    <button class="btn btn-whatsapp" id="send-whatsapp-order">
+                        <i class="fab fa-whatsapp"></i> Send Complete Order via WhatsApp
+                    </button>
+                </div>
+                
+                <p class="note"><i class="fas fa-lightbulb"></i> <strong>Tip:</strong> Cart saves items even if you close the page!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/919840416695?text=Hi,%20I%20would%20like%20to%20order%20groceries%20from%20Kali%20Provisions" 
+       class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <!-- WhatsApp Float Button -->
     <a href="https://wa.me/919840416695?text=Hi,%20I%20would%20like%20to%20order%20groceries%20from%20Kali%20Provisions" 
