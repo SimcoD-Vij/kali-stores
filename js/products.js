@@ -26,7 +26,7 @@ const products = [
         name: "Krishna Rice", 
         weight: "10kg", 
         category: "rice", 
-        image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        image: "https://5.imimg.com/data5/NSDMERP/Default/2022/7/FM/UZ/SD/13723309/psa-krishna-rice-1657181027389-250x250.jpg",
         rating: 4.3,
         description: "High-quality rice with perfect grain consistency"
     },
@@ -53,7 +53,7 @@ const products = [
         name: "Chennai Gate Rice", 
         weight: "10kg", 
         category: "rice", 
-        image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        image: "https://cpimg.tistatic.com/07586087/b/4/Raw-Rice.jpg",
         rating: 4.1,
         description: "Premium rice from Chennai with great flavor"
     },
@@ -71,7 +71,8 @@ const products = [
         name: "Five Star Krishna Rice", 
         weight: "5kg", 
         category: "rice", 
-        image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        image: "https://www.mashed.com/img/gallery/does-freezing-uncooked-rice-make-it-last-longer/l-intro-1682193675.jpg",
+        rating: 4.1,
         rating: 4.3,
         description: "Quality Krishna rice in convenient packaging"
     },
@@ -89,7 +90,8 @@ const products = [
         name: "KGP Krishna Rice", 
         weight: "25kg", 
         category: "rice", 
-        image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        image: "https://www.mashed.com/img/gallery/does-freezing-uncooked-rice-make-it-last-longer/l-intro-1682193675.jpg",
+        rating: 4.1,
         rating: 4.2,
         description: "KGP brand Krishna rice with consistent quality"
     },
@@ -98,7 +100,7 @@ const products = [
         name: "ASP Krishna Rice", 
         weight: "25kg", 
         category: "rice", 
-        image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        image: "https://www.mashed.com/img/gallery/does-freezing-uncooked-rice-make-it-last-longer/l-intro-1682193675.jpg",
         rating: 4.1,
         description: "ASP brand rice with good cooking results"
     },
@@ -129,15 +131,7 @@ const products = [
         rating: 4.0,
         description: "Gomatha brand rice with good quality"
     },
-    { 
-        id: 15, 
-        name: "M200G Rice", 
-        weight: "200g", 
-        category: "rice", 
-        image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-        rating: 3.8,
-        description: "Small trial pack of rice for single use"
-    },
+
     { 
         id: 16, 
         name: "thanga mayil Brand Rice", 
@@ -3926,7 +3920,457 @@ const products = [
         rating: 4.6,
         description: "Premium quality urad dal",
         image: "images/products/vv-gold/uraddal100g.jpg"
-    }
+    },
+    {
+        id: 1085,
+        name: "Tomato",
+        weight: "1kg",
+        category: "vegetables",
+        image: "https://wallpaperaccess.com/full/1462852.jpg",
+        rating: 4.5,
+        description: "Fresh ripe tomatoes for cooking and salads"
+    },
+    {
+        id: 1086,
+        name: "Potato",
+        weight: "1kg",
+        category: "vegetables",
+        image: "https://static.vecteezy.com/system/resources/previews/039/172/279/non_2x/ai-generated-fresh-organic-potatoes-on-market-healthy-food-background-generative-ai-photo.jpg",
+        rating: 4.6,
+        description: "Fresh potatoes for various culinary uses"
+    },
+    {
+        id: 1087,
+        name: "Coriander Leaves",
+        weight: "100g",
+        category: "vegetables",
+        image: "https://cookbook.pfeiffer.net.au/files/corianderPlant.jpg",
+        rating: 4.4,
+        description: "Fresh coriander leaves for garnishing"
+    },
+    {
+        id: 1088,
+        name: "Mint Leaves",
+        weight: "100g",
+        category: "vegetables",
+        image: "https://hindi.cdn.zeenews.com/hindi/sites/default/files/2023/06/21/1897121-pudina-1.jpg",
+        rating: 4.3,
+        description: "Fresh mint leaves for chutneys and drinks"
+    },
+    {
+        id: 1089,
+        name: "Onion",
+        weight: "1kg",
+        category: "vegetables",
+        image: "https://static.vecteezy.com/system/resources/previews/000/808/141/large_2x/big-red-onions-background-photo.jpg",
+        rating: 4.7,
+        description: "Fresh onions for daily cooking needs"
+    },
+    {
+        id: 1090,
+        name: "Garlic",
+        weight: "250g",
+        category: "vegetables",
+        image: "https://www.almanac.com/sites/default/files/image_nodes/garlic-growing-guide.jpg",
+        rating: 4.6,
+        description: "Fresh garlic bulbs for flavoring dishes"
+    },
+    {
+        id: 1091,
+        name: "Ginger",
+        weight: "250g",
+        category: "vegetables",
+        image: "https://www.thespruceeats.com/thmb/bPWzkkBT5vbXlwrRQXNrPBUWxwY=/2336x0/filters:no_upscale():max_bytes(150000):strip_icc()/fresh-ginger-whole-and-chopped-on-rustic-wood-surface-162711007-ed63813f6b2a4acbaeb3e5ff1da17fa2.jpg",
+        rating: 4.5,
+        description: "Fresh ginger for cooking and medicinal uses"
+    },
+    {
+        id: 1092,
+        name: "Brinjal",
+        weight: "500g",
+        category: "vegetables",
+        image: "https://5.imimg.com/data5/DT/MW/FX/SELLER-2668166/brinjal-1000x1000.jpg",
+        rating: 4.3,
+        description: "Fresh brinjal for curries and dishes"
+    },
+    {
+        id: 1093,
+        name: "Beans",
+        weight: "500g",
+        category: "vegetables",
+        image: "https://fhasal.in/wp-content/uploads/2023/01/Beans11.jpg",
+        rating: 4.4,
+        description: "Fresh green beans for healthy meals"
+    },
+    {
+        id: 1094,
+        name: "Coconut",
+        weight: "1 piece",
+        category: "vegetables",
+        image: "https://www.tastingtable.com/img/gallery/11-creative-ways-to-use-a-whole-coconut/l-intro-1669128426.jpg",
+        rating: 4.7,
+        description: "Fresh coconut for cooking and garnishing"
+    },
+    {
+        id: 1095,
+        name: "Beetroot",
+        weight: "500g",
+        category: "vegetables",
+        image: "https://images.pexels.com/photos/1292909/pexels-photo-1292909.jpeg?cs=srgb&dl=beet-beet-greens-beetroot-beetroots-1292909.jpg&fm=jpg",
+        rating: 4.5,
+        description: "Fresh beetroot for salads and juices"
+    },
+    {
+        id: 1096,
+        name: "Cucumber",
+        weight: "500g",
+        category: "vegetables",
+        image: "https://gardenerspath.com/wp-content/uploads/2021/05/Types-of-Cucumbers-FB.jpg",
+        rating: 4.4,
+        description: "Fresh cucumber for salads and snacks"
+    },
+    {
+        id: 1097,
+        name: "Chozham (Taro Root)",
+        weight: "500g",
+        category: "vegetables",
+        image: "https://cdn.shopify.com/s/files/1/0047/9730/0847/products/nurserylive-seeds-taro-root-16969384394832.jpg",
+        rating: 4.3,
+        description: "Fresh chozham for traditional dishes"
+    },
+    {
+        id: 1098,
+        name: "Capsicum",
+        weight: "500g",
+        category: "vegetables",
+        image: "http://www.veggycation.com.au/siteassets/veggycationvegetable/capsicum-green.jpg",
+        rating: 4.5,
+        description: "Fresh capsicum for stir-fries and salads"
+    },
+    {
+        id: 1099,
+        name: "Carrot",
+        weight: "500g",
+        category: "vegetables",
+        image: "https://vwcshopping.com.sg/image/cache/catalog/bt_product/Delfo/EE0105DF-1-800x800.jpg",
+        rating: 4.7,
+        description: "Fresh carrots for salads and cooking"
+    },
+    {
+        id: 1100,
+        name: "Drumstick",
+        weight: "250g",
+        category: "vegetables",
+        image: "https://m.media-amazon.com/images/I/61RClSJWrNL.jpg",
+        rating: 4.4,
+        description: "Fresh drumsticks for sambar and curries"
+    },
+    {
+        id: 1101,
+        name: "Cabbage",
+        weight: "1kg",
+        category: "vegetables",
+        image: "https://en.bcdn.biz/Images/2017/7/14/ed69ca2d-b7a2-411a-9e80-5465c6190e21.jpg",
+        rating: 4.5,
+        description: "Fresh cabbage for salads and stir-fries"
+    },
+    {
+        id: 1102,
+        name: "Shallots",
+        weight: "250g",
+        category: "vegetables",
+        image: "https://static.onecms.io/wp-content/uploads/sites/44/2019/12/shallots-1244-getty.jpg",
+        rating: 4.6,
+        description: "Fresh small onions for traditional recipes"
+    },
+    {
+        id: 1103,
+        name: "Green Chilli",
+        weight: "100g",
+        category: "vegetables",
+        image: "https://purepng.com/public/uploads/large/purepng.com-green-chili-peppersvegetableschilli-pepper-capsicum-green-chili-941524683080dj5zd.png",
+        rating: 4.8,
+        description: "Fresh green chillies for spicy dishes"
+    },
+    {
+        id: 1104,
+        name: "Broad Beans",
+        weight: "500g",
+        category: "vegetables",
+        image: "https://www.dtbrownseeds.co.uk/cdn/shop/collections/DTB_Broad_beans_collection_banner.jpg?v=1695984326&width=4000",
+        rating: 4.3,
+        description: "Fresh broad beans for healthy recipes"
+    },
+    {
+        id: 1105,
+        name: "Bottle Gourd",
+        weight: "1kg",
+        category: "vegetables",
+        image: "https://kaaikani.in/wp-content/uploads/2024/04/Bottle-Guard-1.jpg",
+        rating: 4.4,
+        description: "Fresh bottle gourd for curries and juice"
+    },
+    {
+        id: 1106,
+        name: "Elephant Foot Yam",
+        weight: "500g",
+        category: "vegetables",
+        image: "https://kj1bcdn.b-cdn.net/media/83738/elephant-foot-yam.jpg",
+        rating: 4.2,
+        description: "Fresh yam for traditional dishes"
+    },
+    {
+        id: 1107,
+        name: "Radish",
+        weight: "500g",
+        category: "vegetables",
+        image: "http://www.onlyfoods.net/wp-content/uploads/2012/07/Radish.jpg",
+        rating: 4.3,
+        description: "Fresh radish for salads and cooking"
+    },
+    {
+        id: 1108,
+        name: "Pumpkin",
+        weight: "1kg",
+        category: "vegetables",
+        image: "https://www.silverforkgf.com/wp-content/uploads/2023/10/PUMPKIN.png",
+        rating: 4.5,
+        description: "Fresh pumpkin for curries and sweets"
+    },
+    {
+        id: 1109,
+        name: "Sweet Yam",
+        weight: "500g",
+        category: "vegetables",
+        image: "https://thumbs.dreamstime.com/z/fresh-sweet-potatoes-yams-full-frame-shot-indian-street-market-128739762.jpg",
+        rating: 4.6,
+        description: "Fresh sweet yam for traditional recipes"
+    },
+    {
+        id: 1110,
+        name: "Lemon",
+        weight: "250g",
+        category: "vegetables",
+        image: "https://www.tastingtable.com/img/gallery/31-types-of-lemons-and-what-makes-them-unique/l-intro-1656086555.jpg",
+        rating: 4.7,
+        description: "Fresh lemons for cooking and drinks"
+    },
+    {
+        id: 1111,
+        name: "Tindora (Ivy Gourd)",
+        weight: "500g",
+        category: "vegetables",
+        image: "https://tiimg.tistatic.com/fp/1/004/924/new-harvest-fresh-tindora-583.jpg",
+        rating: 4.3,
+        description: "Fresh tindora for stir-fries and curries"
+    },
+    {
+        id: 1112,
+        name: "Green Peas",
+        weight: "500g",
+        category: "vegetables",
+        image: "https://chefsmandala.com/wp-content/uploads/2018/04/Green-Pea.jpg",
+        rating: 4.6,
+        description: "Fresh green peas for various dishes"
+    },
+    {
+        id: 1113,
+        name: "Lady's Finger",
+        weight: "500g",
+        category: "vegetables",
+        image: "http://urjaseeds.com/cdn/shop/products/pushcart_ladies_finger_vendakkai_1200x1200.jpg?v=1654511079",
+        rating: 4.5,
+        description: "Fresh lady's finger for curries and fries"
+    },
+    {
+        id: 1114,
+        name: "Cauliflower",
+        weight: "1kg",
+        category: "vegetables",
+        image: "https://images5.alphacoders.com/327/327186.jpg",
+        rating: 4.4,
+        description: "Fresh cauliflower for curries and snacks"
+    },
+    // All Products Data (20 items
+    // SPICES - 10 items
+    {
+    id: 401,
+    name: "Turmeric Powder",
+    weight: "100g",
+    category: "spices",
+    image: "https://placehold.co/300x200/FFF8E1/FF9800?text=Turmeric+Powder",
+    rating: 4.7,
+    description: "Pure turmeric powder with rich color and aroma"
+},
+{
+    id: 402,
+    name: "Red Chilli Powder",
+    weight: "100g",
+    category: "spices",
+    image: "https://placehold.co/300x200/FFEBEE/F44336?text=Chilli+Powder",
+    rating: 4.5,
+    description: "Spicy red chilli powder for adding heat"
+},
+{
+    id: 403,
+    name: "Coriander Powder",
+    weight: "100g",
+    category: "spices",
+    image: "https://placehold.co/300x200/F1F8E9/8BC34A?text=Coriander+Powder",
+    rating: 4.6,
+    description: "Aromatic coriander powder for curries"
+},
+{
+    id: 404,
+    name: "Cumin Seeds (Jeera)",
+    weight: "100g",
+    category: "spices",
+    image: "https://placehold.co/300x200/FFF3E0/FF9800?text=Cumin+Seeds",
+    rating: 4.4,
+    description: "Whole cumin seeds for tempering"
+},
+{
+    id: 405,
+    name: "Garam Masala",
+    weight: "100g",
+    category: "spices",
+    image: "https://placehold.co/300x200/FFF8E1/FF9800?text=Garam+Masala",
+    rating: 4.8,
+    description: "Premium blend of aromatic spices"
+},
+{
+    id: 406,
+    name: "Mustard Seeds",
+    weight: "100g",
+    category: "spices",
+    image: "https://placehold.co/300x200/FFF59D/FFC107?text=Mustard+Seeds",
+    rating: 4.3,
+    description: "Black mustard seeds for tempering"
+},
+{
+    id: 407,
+    name: "Fennel Seeds (Saunf)",
+    weight: "100g",
+    category: "spices",
+    image: "https://placehold.co/300x200/E8F5E8/4CAF50?text=Fennel+Seeds",
+    rating: 4.5,
+    description: "Sweet fennel seeds for digestion"
+},
+{
+    id: 408,
+    name: "Black Pepper",
+    weight: "100g",
+    category: "spices",
+    image: "https://placehold.co/300x200/F5F5F5/212121?text=Black+Pepper",
+    rating: 4.7,
+    description: "Whole black pepper corns"
+},
+{
+    id: 409,
+    name: "Cardamom (Elaichi)",
+    weight: "50g",
+    category: "spices",
+    image: "https://placehold.co/300x200/E8F5E8/2E7D32?text=Cardamom",
+    rating: 4.9,
+    description: "Green cardamom pods for flavor"
+},
+{
+    id: 410,
+    name: "Cloves (Laung)",
+    weight: "50g",
+    category: "spices",
+    image: "https://placehold.co/300x200/FFEBEE/D32F2F?text=Cloves",
+    rating: 4.6,
+    description: "Aromatic cloves for biryani and curries"
+},
+{
+    id: 501,
+    name: "Toor Dal (Pigeon Pea)",
+    weight: "1kg",
+    category: "pulses",
+    image: "https://placehold.co/300x200/F5E5B8/8B4513?text=Toor+Dal",
+    rating: 4.8,
+    description: "Premium quality toor dal for sambar"
+},
+{
+    id: 502,
+    name: "Moong Dal",
+    weight: "1kg",
+    category: "pulses",
+    image: "https://placehold.co/300x200/F0E68C/556B2F?text=Moong+Dal",
+    rating: 4.7,
+    description: "Split green gram for dal fry"
+},
+{
+    id: 503,
+    name: "Chana Dal",
+    weight: "1kg",
+    category: "pulses",
+    image: "https://placehold.co/300x200/FFE4B5/D2691E?text=Chana+Dal",
+    rating: 4.6,
+    description: "Bengal gram dal for curries"
+},
+{
+    id: 504,
+    name: "Urad Dal",
+    weight: "1kg",
+    category: "pulses",
+    image: "https://placehold.co/300x200/F0FFF0/228B22?text=Urad+Dal",
+    rating: 4.9,
+    description: "Black gram dal for idli and dosa"
+},
+{
+    id: 505,
+    name: "Masoor Dal",
+    weight: "1kg",
+    category: "pulses",
+    image: "https://placehold.co/300x200/FFE4E1/DC143C?text=Masoor+Dal",
+    rating: 4.5,
+    description: "Red lentil dal, cooks quickly"
+},
+{
+    id: 506,
+    name: "Whole Moong",
+    weight: "1kg",
+    category: "pulses",
+    image: "https://placehold.co/300x200/98FB98/2E8B57?text=Whole+Moong",
+    rating: 4.7,
+    description: "Whole green gram for sprouts"
+},
+{
+    id: 507,
+    name: "Rajma (Kidney Beans)",
+    weight: "1kg",
+    category: "pulses",
+    image: "https://placehold.co/300x200/FFCCCB/B22222?text=Rajma",
+    rating: 4.8,
+    description: "Red kidney beans for rajma curry"
+},
+{
+    id: 508,
+    name: "Kabuli Chana (Chickpeas)",
+    weight: "1kg",
+    category: "pulses",
+    image: "https://placehold.co/300x200/FFFACD/DAA520?text=Chickpeas",
+    rating: 4.6,
+    description: "White chickpeas for chole"
+},
+{
+    id: 509,
+    name: "Yellow Peas (Matar)",
+    weight: "1kg",
+    category: "pulses",
+    image: "https://placehold.co/300x200/FFFFE0/FFD700?text=Yellow+Peas",
+    rating: 4.4,
+    description: "Yellow peas for dal and soups"
+},
+{
+    id: 510,
+    name: "Mixed Dal",
+    weight: "1kg",
+    category: "pulses",
+    image: "https://placehold.co/300x200/E6E6FA/9370DB?text=Mixed+Dal",
+    rating: 4.7,
+    description: "Mixed lentils for nutritious dal"
+}
 ];
-
-// Products Page Specific Functions

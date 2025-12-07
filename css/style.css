@@ -8379,4 +8379,41 @@ footer {
         width: 100%;
         justify-content: space-between;
     }
+    /* Instagram link styling in contact page */
+.instagram-link {
+    color: #E4405F;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.instagram-link:hover {
+    color: #C13584;
+    text-decoration: underline;
+    transform: translateY(-2px);
+}
+
+/* Instagram icon color in contact item */
+.contact-item .fa-instagram {
+    color: #E4405F;
+}
+
+/* Footer Instagram link styling */
+.footer-col ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    color: #4CAF50;
+    text-decoration: underline;
+}
+
+.footer-col .fa-instagram {
+    color: #E4405F;
+}
 }
