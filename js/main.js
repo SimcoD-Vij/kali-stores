@@ -353,69 +353,63 @@ class KaliProvisions {
 
     updateCartDisplay() {
         const cartItemsEl = document.getElementById('cart-items');
+        const summaryTotalEl = document.getElementById('summary-total-items');
+        
+        // Calculate total items
         const totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
         
-        const cartCountEl = document.querySelector('.cart-count');
-        if (cartCountEl) {
-            cartCountEl.textContent = `${totalItems} item${totalItems !== 1 ? 's' : ''}`;
+        // Update header badges
+        document.querySelectorAll('.cart-badge, .cart-count-badge').forEach(el => {
+            el.textContent = totalItems;
+            el.style.display = totalItems > 0 ? 'inline-block' : 'none';
+        });
+
+        // Update Summary Count
+        if (summaryTotalEl) {
+            summaryTotalEl.textContent = totalItems;
         }
         
-        this.updateHeaderCartBadge();
-        
+        // Safety check if we are not on cart page but have cart logic running
         if (!cartItemsEl) return;
         
+        // 1. Handle Empty Cart
         if (this.cart.length === 0) {
-            if (window.location.pathname.includes('cart.html')) {
-                cartItemsEl.innerHTML = `
-                    <div class="empty-cart-state">
-                        <i class="fas fa-shopping-cart"></i>
-                        <h3>Your cart is empty</h3>
-                        <p>Add some products from our store</p>
-                        <a href="products.html" class="btn btn-primary">
-                            <i class="fas fa-store"></i> Browse Products
-                        </a>
-                    </div>
-                `;
-            } else {
-                cartItemsEl.innerHTML = '<p class="empty-cart">Your cart is empty. Select quantities above and click "Add to Cart"</p>';
-            }
+            cartItemsEl.innerHTML = `
+                <div class="empty-cart-state">
+                    <i class="fas fa-shopping-basket" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
+                    <h3>Your cart is empty</h3>
+                    <p>Add some products from our store to get started.</p>
+                    <a href="products.html" class="btn btn-primary" style="margin-top: 15px;">Browse Products</a>
+                </div>
+            `;
             return;
         }
         
+        // 2. Render Cart Items (Professional Cards)
         if (window.location.pathname.includes('cart.html')) {
             cartItemsEl.innerHTML = this.cart.map(item => `
                 <div class="cart-item-card" data-id="${item.id}">
-                    <div class="cart-item-details">
-                        <h4>${item.name}</h4>
-                        <div class="cart-item-controls">
-                            <button class="cart-item-minus" data-id="${item.id}">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <span class="cart-item-qty">${item.quantity}</span>
-                            <button class="cart-item-plus" data-id="${item.id}">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="cart-item-actions">
-                        <button class="cart-item-remove" data-id="${item.id}">
-                            <i class="fas fa-trash"></i> Remove
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-        } else {
-            cartItemsEl.innerHTML = this.cart.map(item => `
-                <div class="cart-item" data-id="${item.id}">
                     <div class="cart-item-info">
                         <h4>${item.name}</h4>
-                        <div class="cart-item-qty">Quantity: ${item.quantity}</div>
+                        <div class="cart-item-meta">
+                            <i class="fas fa-tag"></i> Item ID: ${item.id}
+                        </div>
                     </div>
-                    <div class="cart-item-controls">
-                        <button class="cart-item-minus" data-id="${item.id}">−</button>
-                        <span>${item.quantity}</span>
-                        <button class="cart-item-plus" data-id="${item.id}">+</button>
-                        <button class="cart-item-remove" data-id="${item.id}">×</button>
+                    
+                    <div class="cart-item-actions">
+                        <div class="qty-control-group">
+                            <button class="qty-btn-mini cart-item-minus" data-id="${item.id}">
+                                <i class="fas fa-minus" style="font-size: 0.7rem;"></i>
+                            </button>
+                            <div class="qty-display">${item.quantity}</div>
+                            <button class="qty-btn-mini cart-item-plus" data-id="${item.id}">
+                                <i class="fas fa-plus" style="font-size: 0.7rem;"></i>
+                            </button>
+                        </div>
+                        
+                        <button class="btn-remove-item cart-item-remove" data-id="${item.id}" title="Remove Item">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </div>
                 </div>
             `).join('');

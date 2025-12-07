@@ -7,11 +7,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Add these to your <head> section -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container header-container">
             <div class="logo">
@@ -30,13 +27,11 @@
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="cart.html" class="active nav-cart-link">Cart <i class="fas fa-shopping-cart"></i></a></li>
                 </ul>
             </nav>
             
             <div class="header-actions">
-                <div class="search-bar">
-                    <input type="text" placeholder="Search products..." id="globalSearch">
-                </div>
                 <a href="tel:9840416695" class="call-btn">
                     <i class="fas fa-phone"></i>
                 </a>
@@ -44,173 +39,113 @@
         </div>
     </header>
 
-    <!-- Cart Page Header -->
     <section class="page-hero">
         <div class="container">
             <div class="page-header">
-                <h1><i class="fas fa-shopping-cart"></i> My Shopping Cart</h1>
-                <p>Review your order and place it</p>
+                <h1>Shopping Cart</h1>
+                <p>Review your items and checkout via WhatsApp</p>
             </div>
         </div>
     </section>
 
-    <!-- Cart Content -->
     <section class="section cart-page">
         <div class="container">
             <div class="cart-layout">
-                <!-- Left: Cart Items -->
-                <div class="cart-items-section">
-                    <div class="section-header">
-                        <h2>Your Selected Items</h2>
-                        <span class="cart-count">0 items</span>
+                
+                <div class="cart-items-container">
+                    <div class="cart-header-row">
+                        <h2>Your Items <span class="cart-count-badge">0</span></h2>
+                        <button id="clear-cart" class="btn-text-danger"><i class="fas fa-trash"></i> Clear All</button>
                     </div>
                     
-                    <div class="cart-items-list" id="cart-items">
+                    <div id="cart-items" class="cart-items-list">
                         <div class="empty-cart-state">
-                            <i class="fas fa-shopping-cart"></i>
+                            <i class="fas fa-shopping-basket"></i>
                             <h3>Your cart is empty</h3>
-                            <p>Add some products from our store</p>
-                            <a href="products.html" class="btn btn-primary">
-                                <i class="fas fa-store"></i> Browse Products
-                            </a>
+                            <p>Looks like you haven't added anything yet.</p>
+                            <a href="products.html" class="btn btn-primary">Start Shopping</a>
                         </div>
                     </div>
                     
-                    <div class="cart-actions">
+                    <div class="cart-actions-row">
                         <a href="products.html" class="btn btn-secondary">
                             <i class="fas fa-arrow-left"></i> Continue Shopping
                         </a>
-                        <button class="btn btn-clear" id="clear-cart">
-                            <i class="fas fa-trash"></i> Clear Cart
-                        </button>
                     </div>
                 </div>
                 
-                <!-- Right: Order Summary & Checkout -->
-                <div class="order-summary-section">
-                    <div class="order-summary-card">
-                        <h3><i class="fas fa-clipboard-list"></i> Order Summary</h3>
+                <div class="checkout-sidebar">
+                    <div class="checkout-card">
+                        <h3><i class="fas fa-receipt"></i> Order Summary</h3>
                         
-                        <div class="summary-details">
-                            <div class="summary-item">
+                        <div class="summary-stats">
+                            <div class="stat-row">
                                 <span>Total Items:</span>
-                                <span id="total-items">0</span>
+                                <span id="summary-total-items">0</span>
                             </div>
-                            <div class="summary-item">
-                                <span>Product Types:</span>
-                                <span id="product-types">0</span>
+                            <div class="stat-row">
+                                <span>Delivery Fee:</span>
+                                <span>Calculated on WhatsApp</span>
                             </div>
                         </div>
-                        
-                        <div class="checkout-section" id="checkout-form">
-                            <h4><i class="fas fa-user-check"></i> Customer Details</h4>
+
+                        <div class="checkout-form">
+                            <h4>Customer Details</h4>
                             
                             <div class="form-group">
-                                <label for="customer-name">
-                                    <i class="fas fa-user"></i> Your Full Name *
-                                </label>
+                                <label><i class="fas fa-user"></i> Full Name *</label>
                                 <input type="text" id="customer-name" placeholder="Enter your name" required>
                             </div>
                             
                             <div class="form-group">
-                                <label for="customer-phone">
-                                    <i class="fas fa-phone"></i> WhatsApp Number *
-                                </label>
-                                <input type="tel" id="customer-phone" placeholder="Enter your WhatsApp number" required>
+                                <label><i class="fab fa-whatsapp"></i> WhatsApp Number *</label>
+                                <input type="tel" id="customer-phone" placeholder="Ex: 9840416695" required>
                             </div>
                             
                             <div class="form-group">
-                                <label for="customer-location">
-                                    <i class="fas fa-map-marker-alt"></i> Delivery Location
-                                </label>
-                                <input type="text" id="customer-location" placeholder="Enter your address for delivery">
+                                <label><i class="fas fa-map-marker-alt"></i> Delivery Address</label>
+                                <textarea id="customer-location" rows="2" placeholder="Street, Area, Pincode (Optional for pickup)"></textarea>
                             </div>
                             
                             <div class="form-group">
-                                <label><i class="fas fa-shipping-fast"></i> Order Type *</label>
-                                <div class="order-type">
-                                    <label class="radio-label">
+                                <label><i class="fas fa-truck"></i> Order Type</label>
+                                <div class="radio-group">
+                                    <label class="radio-card">
                                         <input type="radio" name="order-type" value="instore" checked>
-                                        <span>🏪 In-Store Pickup</span>
-                                        <small>We'll pack items. Visit shop, collect & pay.</small>
+                                        <div class="radio-content">
+                                            <span class="radio-title">Store Pickup</span>
+                                            <span class="radio-desc">Pay & Collect at Shop</span>
+                                        </div>
                                     </label>
-                                    
-                                    <label class="radio-label">
+                                    <label class="radio-card">
                                         <input type="radio" name="order-type" value="cod">
-                                        <span>🚚 Cash on Delivery (COD)</span>
-                                        <small>Available for orders above ₹800. Delivery charges vary.</small>
+                                        <div class="radio-content">
+                                            <span class="radio-title">Home Delivery</span>
+                                            <span class="radio-desc">Cash on Delivery</span>
+                                        </div>
                                     </label>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
-                                <label for="special-instructions">
-                                    <i class="fas fa-sticky-note"></i> Special Instructions (Optional)
-                                </label>
-                                <textarea id="special-instructions" placeholder="Any special requests or instructions..." rows="3"></textarea>
+                                <label>Special Instructions (Optional)</label>
+                                <textarea id="special-instructions" rows="1" placeholder="Ex: Call before coming..."></textarea>
                             </div>
                             
-                            <div class="order-note">
-                                <p><i class="fas fa-info-circle"></i> <strong>Note:</strong> You'll review the order on WhatsApp before final confirmation.</p>
-                            </div>
-                            
-                            <button class="btn btn-whatsapp" id="place-order-btn">
-                                <i class="fab fa-whatsapp"></i> Place Order via WhatsApp
+                            <button id="send-whatsapp-order" class="btn btn-whatsapp-full">
+                                <i class="fab fa-whatsapp"></i> Place Order on WhatsApp
                             </button>
-                            
-                            <p class="secure-note">
-                                <i class="fas fa-lock"></i> Your information is secure. No payment details required.
-                            </p>
+                            <p class="secure-text"><i class="fas fa-lock"></i> No online payment required</p>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- WhatsApp Float Button -->
-    <a href="https://wa.me/919840416695?text=Hi,%20I%20would%20like%20to%20order%20groceries%20from%20Kali%20Provisions" 
-       class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-col">
-                    <h3>Kali Provisions</h3>
-                    <p>Your trusted local grocery store for quality products and excellent service.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="https://wa.me/919840416695"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="products.html">Products</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h3>Contact Info</h3>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> 1/B, Constable Road, Ayanavaram, Chennai-23</li>
-                        <li><i class="fas fa-phone"></i> 9840416695</li>
-                        <li><i class="fas fa-envelope"></i> saravanaguru0707@gmail.com</li>
-                        <li><i class="fas fa-clock"></i> 6:30 AM - 10:00 PM</li>
-                    </ul>
-                </div>
-            </div>
-            
             <div class="copyright">
                 <p>&copy; 2024 Kali Provisions. All rights reserved.</p>
             </div>
@@ -220,10 +155,10 @@
     <script src="js/products.js"></script>
     <script src="js/main.js"></script>
     <script>
-        // Initialize cart on cart page
+        // Force cart refresh on load
         document.addEventListener('DOMContentLoaded', function() {
-            if (window.kaliProvisions) {
-                window.kaliProvisions.updateCartPage();
+            if(window.kaliProvisions) {
+                window.kaliProvisions.updateCartDisplay();
             }
         });
     </script>
